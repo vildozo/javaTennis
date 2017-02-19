@@ -35,54 +35,29 @@ public class TennisGame2 implements TennisGame
             score = "Deuce";
         if (player1Points > pointsNone && player2Points==pointsNone)
         {
-            if (player1Points==1)
-                player1LiteralScore = "Fifteen";
-            if (player1Points==2)
-                player1LiteralScore = "Thirty";
-            if (player1Points==3)
-                player1LiteralScore = "Forty";
-            
+        	player1LiteralScore=convertPointsToLiteral(player1Points);
             player2LiteralScore = "Love";
             score = player1LiteralScore + "-" + player2LiteralScore;
         }
         if (player2Points > pointsNone && player1Points==pointsNone)
         {
-            if (player2Points==1)
-                player2LiteralScore = "Fifteen";
-            if (player2Points==2)
-                player2LiteralScore = "Thirty";
-            if (player2Points==3)
-                player2LiteralScore = "Forty";
-            
+        	player2LiteralScore=convertPointsToLiteral(player2Points);
             player1LiteralScore = "Love";
             score = player1LiteralScore + "-" + player2LiteralScore;
         }
         
         if (player1Points>player2Points && player1Points < pointGame)
         {
-            if (player1Points==2)
-                player1LiteralScore="Thirty";
-            if (player1Points==3)
-                player1LiteralScore="Forty";
-            if (player2Points==1)
-                player2LiteralScore="Fifteen";
-            if (player2Points==2)
-                player2LiteralScore="Thirty";
-            score = player1LiteralScore + "-" + player2LiteralScore;
+        	player1LiteralScore=convertPointsToLiteral(player1Points);
+        	player2LiteralScore=convertPointsToLiteral(player2Points);
+           score = player1LiteralScore + "-" + player2LiteralScore;
         }
         if (player2Points>player1Points && player2Points < pointGame)
         {
-            if (player2Points==2)
-                player2LiteralScore="Thirty";
-            if (player2Points==3)
-                player2LiteralScore="Forty";
-            if (player1Points==1)
-                player1LiteralScore="Fifteen";
-            if (player1Points==2)
-                player1LiteralScore="Thirty";
+        	player2LiteralScore=convertPointsToLiteral(player2Points);
+        	player1LiteralScore=convertPointsToLiteral(player1Points);
             score = player1LiteralScore + "-" + player2LiteralScore;
-        }
-        
+        } 
         if (player1Points > player2Points && player2Points >= points40)
         {
             score = "Advantage player1";
