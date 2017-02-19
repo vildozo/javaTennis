@@ -75,20 +75,32 @@ public class TennisGame2 implements TennisGame
         
         
         
-        score = showsWinner(score, player1Points, player2Points);
+        score = playerWinsGame(score, player1Points, player2Points);
         return score;
     }
 
-	private String showsWinner(String score, int player1Points, int player2Points) {
-		if (player1Points>=pointGame && player2Points>=pointsNone && (player1Points-player2Points)>=points30)
+	private String playerWinsGame(String score, int player1Points, int player2Points) {
+		if (playerInGamepointOtherPlayerNotInGame(player1Points, player2Points) && twoPointsDifference(player1Points, player2Points) )
         {
             score = "Win for player1";
         }
-        if (player2Points>=4 && player1Points>=0 && (player2Points-player1Points)>=points30)
+        if (playerInGamepointOtherPlayerNotInGame(player2Points, player1Points) && twoPointsDifference(player2Points, player1Points))
         {
             score = "Win for player2";
         }
 		return score;
+	}
+
+	private boolean playerInGamepointOtherPlayerNotInGame(int pointsOfAPlayer, int pointsOfOtherPlayer) {
+		if (pointsOfAPlayer>=pointGame && pointsOfOtherPlayer>=pointsNone)
+			return true;
+		return false;
+	}
+
+	private boolean twoPointsDifference(int player1Points, int player2Points) {
+		if ((player1Points-player2Points)>=points30)
+			return true;
+		return false;
 	}
     
     public void SetP1Score(int number){
