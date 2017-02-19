@@ -9,8 +9,7 @@ public class TennisGame2 implements TennisGame
 	public int player1Points = 0;
     public int player2Points = 0;
     
-    public String player1LiteralScore = "";
-    public String player2LiteralScore = "";
+
 
     public TennisGame2() {
     }
@@ -39,13 +38,11 @@ public class TennisGame2 implements TennisGame
         
         if (player1Points > pointsNone && player2Points==pointsNone)
         {
-            player2LiteralScore = "Love";
-            score = convertPointsToLiteral(player1Points) + "-" + player2LiteralScore;
+        	score = convertPointsToLiteral(player1Points) + "-" + convertPointsToLiteral(player2Points);
         }
         if (player2Points > pointsNone && player1Points==pointsNone)
         {
-            player1LiteralScore = "Love";
-            score = player1LiteralScore + "-" + convertPointsToLiteral(player2Points);
+            score = convertPointsToLiteral(player1Points) + "-" + convertPointsToLiteral(player2Points);
         }
         
         
