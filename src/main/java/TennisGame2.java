@@ -11,8 +11,7 @@ public class TennisGame2 implements TennisGame
     
 
 
-    public TennisGame2() {
-    }
+    public TennisGame2() {    }
 
     public String convertPointsToLiteral(int puntosDeJugador){
     	if (puntosDeJugador==pointsNone)
