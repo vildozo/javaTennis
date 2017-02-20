@@ -34,6 +34,7 @@ public class TennisGame2 implements TennisGame
         score = playerWinsGame(score, player1Points, player2Points);
         return score;
     }
+    
 
 	private String tiedScoreNotDeuce(String score, int player1Points, int Player2Points) {
 		if (player1Points == player2Points && player1Points < pointGame)
