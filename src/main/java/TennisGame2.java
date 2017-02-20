@@ -27,16 +27,25 @@ public class TennisGame2 implements TennisGame
     
     public String getScore(){
         String score = "";
-        if (player1Points == player2Points && player1Points < pointGame)
-        	score = convertPointsToLiteral(player1Points) + "-All";
-        
-        if (player1Points==player2Points && player1Points>=3)
-            score = "Deuce";  
+        score = tiedScoreNotDeuce(score, player1Points, player2Points);        
+        score = playersScoreInDeuce(score, player1Points, player2Points);  
         score = playingForPointsNotDeuceNotAdvantage(score, player1Points, player2Points);       
         score = playersPlayingForAdvantage(score, player1Points, player2Points);
         score = playerWinsGame(score, player1Points, player2Points);
         return score;
     }
+
+	private String tiedScoreNotDeuce(String score, int player1Points, int Player2Points) {
+		if (player1Points == player2Points && player1Points < pointGame)
+        	score = convertPointsToLiteral(player1Points) + "-All";
+		return score;
+	}
+
+	private String playersScoreInDeuce(String score, int playerPoints, int otherPlayerPoints) {
+		if (playerPoints==otherPlayerPoints && playerPoints>=3)
+            score = "Deuce";
+		return score;
+	}
 
 	private String playersPlayingForAdvantage(String score, int playerPoints, int otherPlayerPoints) {
 		if (playerPointsHigherThanOtherPlayerPoint(player1Points, player2Points) && playingForAdvantage(player2Points))
@@ -119,6 +128,7 @@ public class TennisGame2 implements TennisGame
     public void P2Score(){
         player2Points++;
     }
+    
 
     public void wonPoint(String player) {
         if (player == "player1")
