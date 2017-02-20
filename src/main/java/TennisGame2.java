@@ -31,49 +31,44 @@ public class TennisGame2 implements TennisGame
         	score = convertPointsToLiteral(player1Points) + "-All";
         
         if (player1Points==player2Points && player1Points>=3)
-            score = "Deuce";
-        
-        
-        
-        if (player1Points > pointsNone && player2Points==pointsNone)
-        {
-        	score = convertPointsToLiteral(player1Points) + "-" + convertPointsToLiteral(player2Points);
-        }
-        if (player2Points > pointsNone && player1Points==pointsNone)
-        {
-            score = convertPointsToLiteral(player1Points) + "-" + convertPointsToLiteral(player2Points);
-        }
-        
-        
-        
-        
-        if (player1Points>player2Points && player1Points < pointGame)
-        {
-           score = convertPointsToLiteral(player1Points) + "-" + convertPointsToLiteral(player2Points);
-        }
-        if (player2Points>player1Points && player2Points < pointGame)
-        {
-        	score = convertPointsToLiteral(player1Points) + "-" + convertPointsToLiteral(player2Points);
-        } 
-        
-        
-        
-        
-        if (player1Points > player2Points && player2Points >= points40)
-        {
-            score = "Advantage player1";
-        }
-        if (player2Points > player1Points && player1Points >= points40)
-        {
-            score = "Advantage player2";
-        }
-        
-        
-        
-        
+            score = "Deuce";  
+        score = playingForPointsNotDeuceNotAdvantage(score, player1Points, player2Points);       
+        score = playersPlayingForAdvantage(score, player1Points, player2Points);
         score = playerWinsGame(score, player1Points, player2Points);
         return score;
     }
+
+	private String playersPlayingForAdvantage(String score, int playerPoints, int otherPlayerPoints) {
+		if (playerPointsHigherThanOtherPlayerPoint(player1Points, player2Points) && playingForAdvantage(player2Points))
+        {
+            score = "Advantage player1";
+        }
+        if (player2Points > player1Points && playingForAdvantage(player1Points))
+        {
+            score = "Advantage player2";
+        }
+		return score;
+	}
+
+	private String playingForPointsNotDeuceNotAdvantage(String score, int player1Points, int player2Points) {
+		if (playerPointsHigherThanOtherPlayerPoint(player1Points, player2Points) && player1Points < pointGame)
+        {
+           score = convertPointsToLiteral(player1Points) + "-" + convertPointsToLiteral(player2Points);
+        }
+        if (playerPointsHigherThanOtherPlayerPoint(player2Points, player1Points) && player2Points < pointGame)
+        {
+        	score = convertPointsToLiteral(player1Points) + "-" + convertPointsToLiteral(player2Points);
+        }
+		return score;
+	}
+
+	private boolean playerPointsHigherThanOtherPlayerPoint(int playerPoints, int otherPlayerPoints) {
+		return (playerPoints > otherPlayerPoints);
+	}
+
+	private boolean playingForAdvantage(int playerPoints) {
+		return (playerPoints >= points40);
+	}
 
 	private String playerWinsGame(String score, int player1Points, int player2Points) {
 		if (playerInGamepointOtherPlayerNotInGame(player1Points, player2Points) && twoPointsDifference(player1Points, player2Points) )
