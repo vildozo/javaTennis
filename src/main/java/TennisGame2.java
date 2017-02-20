@@ -10,7 +10,6 @@ public class TennisGame2 implements TennisGame
     public int player2Points = 0;
     
 
-
     public TennisGame2() {    }
 
     public String convertPointsToLiteral(int puntosDeJugador){
@@ -25,10 +24,10 @@ public class TennisGame2 implements TennisGame
         return"";
     }
     
-    public String getScore(){
+    public String getLiteralScore(){
         String score = "";
-        score = tiedScoreNotDeuce(score, player1Points, player2Points);        
-        score = playersScoreInDeuce(score, player1Points, player2Points);  
+        score = tiedScoreNotDeuce(player1Points, player2Points);        
+        score = tiedScoreInDeuce(score, player1Points, player2Points);  
         score = playingForPointsNotDeuceNotAdvantage(score, player1Points, player2Points);       
         score = playersPlayingForAdvantage(score, player1Points, player2Points);
         score = playerWinsGame(score, player1Points, player2Points);
@@ -36,13 +35,13 @@ public class TennisGame2 implements TennisGame
     }
     
 
-	private String tiedScoreNotDeuce(String score, int player1Points, int Player2Points) {
+	private String tiedScoreNotDeuce(int player1Points, int Player2Points) {
 		if (player1Points == player2Points && player1Points < pointGame)
-        	score = convertPointsToLiteral(player1Points) + "-All";
-		return score;
+        	return (convertPointsToLiteral(player1Points) + "-All");
+		return "";
 	}
 
-	private String playersScoreInDeuce(String score, int playerPoints, int otherPlayerPoints) {
+	private String tiedScoreInDeuce(String score, int playerPoints, int otherPlayerPoints) {
 		if (playerPoints==otherPlayerPoints && playerPoints>=3)
             score = "Deuce";
 		return score;
@@ -53,13 +52,14 @@ public class TennisGame2 implements TennisGame
         {
             score = "Advantage player1";
         }
-        if (player2Points > player1Points && playingForAdvantage(player1Points))
+        if (playerPointsHigherThanOtherPlayerPoint(player2Points, player1Points) && playingForAdvantage(player1Points))
         {
             score = "Advantage player2";
         }
 		return score;
 	}
 
+	
 	private String playingForPointsNotDeuceNotAdvantage(String score, int player1Points, int player2Points) {
 		if (playerPointsHigherThanOtherPlayerPoint(player1Points, player2Points) && player1Points < pointGame)
         {
@@ -72,6 +72,8 @@ public class TennisGame2 implements TennisGame
 		return score;
 	}
 
+
+	
 	private boolean playerPointsHigherThanOtherPlayerPoint(int playerPoints, int otherPlayerPoints) {
 		return (playerPoints > otherPlayerPoints);
 	}
@@ -91,22 +93,21 @@ public class TennisGame2 implements TennisGame
         }
 		return score;
 	}
+	
 
 	private boolean playerInGamepointOtherPlayerNotInGame(int pointsOfAPlayer, int pointsOfOtherPlayer) {
-		if (pointsOfAPlayer>=pointGame && pointsOfOtherPlayer>=pointsNone)
-			return true;
-		return false;
+		return (pointsOfAPlayer>=pointGame && pointsOfOtherPlayer>=pointsNone);
+
 	}
+	
 
 	private boolean twoPointsDifference(int player1Points, int player2Points) {
-		if ((player1Points-player2Points)>=points30)
-			return true;
-		return false;
+		return ((player1Points-player2Points)>=points30);		
 	}
     
     public void SetP1Score(int number){
         
-        for (int i = 0; i < number; i++)
+        for (int puntosAnotadosJugador1 = 0; puntosAnotadosJugador1 < number; puntosAnotadosJugador1++)
         {
             P1Score();
         }
@@ -115,7 +116,7 @@ public class TennisGame2 implements TennisGame
     
     public void SetP2Score(int number){
         
-        for (int i = 0; i < number; i++)
+        for (int puntosAnotadosPorJugador2 = 0; puntosAnotadosPorJugador2 < number; puntosAnotadosPorJugador2++)
         {
             P2Score();
         }
@@ -130,7 +131,7 @@ public class TennisGame2 implements TennisGame
         player2Points++;
     }
     
-
+    
     public void wonPoint(String player) {
         if (player == "player1")
             P1Score();
